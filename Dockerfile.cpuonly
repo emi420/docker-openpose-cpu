@@ -29,12 +29,12 @@ WORKDIR /openpose/build
 RUN cmake -DGPU_MODE:String=CPU_ONLY \
           -DDOWNLOAD_BODY_MPI_MODEL:Bool=ON \
           -DDOWNLOAD_BODY_COCO_MODEL:Bool=ON \
-          -DDOWNLOAD_FACE_MODEL:Bool=ON \
-          -DDOWNLOAD_HAND_MODEL:Bool=ON \
+          -DDOWNLOAD_FACE_MODEL:Bool=OFF \
+          -DDOWNLOAD_HAND_MODEL:Bool=OFF \
           -DUSE_MKL:Bool=OFF \
           ..
 
-RUN make -j # yolo
+RUN make all -j4  # yolo
 
 RUN apt-get remove wget unzip cmake git build-essential -y && apt-get autoremove -y
 
